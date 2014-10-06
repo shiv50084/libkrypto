@@ -155,6 +155,8 @@ set(str_SRCS
     )
 
 set(stralloc_SRCS
+    src/stralloc/gen_alloc.h
+    src/stralloc/gen_allocdefs.h
     src/stralloc/stralloc.h
     src/stralloc/stralloc_cat.c
     src/stralloc/stralloc_catb.c
