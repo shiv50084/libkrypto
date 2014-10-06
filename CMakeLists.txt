@@ -142,6 +142,7 @@ include_directories(src/exit)
 include_directories(src/fd)
 include_directories(src/fmt)
 include_directories(src/fork)
+include_directories(src/getln)
 include_directories(src/iopause)
 include_directories(src/open)
 include_directories(src/select)
@@ -233,6 +234,12 @@ set(fmt_SRCS
     src/fmt/fmt_ulong.c
     src/fmt/fmtqfn.h
     src/fmt/fmtqfn.c
+    )
+
+set(getln_SRCS
+    src/getln/getln.h
+    src/getln/getln.c
+    src/getln/getln2.c
     )
 
 set(iopause_SRCS
@@ -360,6 +367,7 @@ set(LIB_SRC
     ${error_SRCS}
     ${fd_SRCS}
     ${fmt_SRCS}
+    ${getln_SRCS}
     ${iopause_SRCS}
     ${open_SRCS}
     ${socket_SRCS}
