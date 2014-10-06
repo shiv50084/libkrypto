@@ -109,6 +109,7 @@ include_directories(src/alloc)
 include_directories(src/buffer)
 include_directories(src/byte)
 include_directories(src/case)
+include_directories(src/datetime)
 include_directories(src/error)
 include_directories(src/exit)
 include_directories(src/iopause)
@@ -163,6 +164,14 @@ set(case_SRCS
     src/case/case_lowerb.c
     src/case/case_lowers.c
     src/case/case_starts.c
+    )
+
+set(datetime_SRCS
+    src/datetime/datetime.h
+    src/datetime/datetime.c
+    src/datetime/datetime_un.c
+    src/datetime/date822fmt.h
+    src/datetime/date822fmt.c
     )
 
 set(error_SRCS
@@ -292,6 +301,7 @@ set(LIB_SRC
     ${buffer_SRCS}
     ${byte_SRCS}
     ${case_SRCS}
+    ${datetime_SRCS}
     ${error_SRCS}
     ${iopause_SRCS}
     ${open_SRCS}
