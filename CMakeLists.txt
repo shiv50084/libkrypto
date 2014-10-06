@@ -110,6 +110,7 @@ include_directories(src/buffer)
 include_directories(src/byte)
 include_directories(src/case)
 include_directories(src/datetime)
+include_directories(src/env)
 include_directories(src/error)
 include_directories(src/exit)
 include_directories(src/fmt)
@@ -173,6 +174,12 @@ set(datetime_SRCS
     src/datetime/datetime_un.c
     src/datetime/date822fmt.h
     src/datetime/date822fmt.c
+    )
+
+set(env_SRCS
+    src/env/env.h
+    src/env/env.c
+    src/env/envread.c
     )
 
 set(error_SRCS
@@ -315,6 +322,7 @@ set(LIB_SRC
     ${byte_SRCS}
     ${case_SRCS}
     ${datetime_SRCS}
+    ${env_SRCS}
     ${error_SRCS}
     ${fmt_SRCS}
     ${iopause_SRCS}
