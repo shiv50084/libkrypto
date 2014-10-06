@@ -116,6 +116,7 @@ include_directories(src/socket)
 include_directories(src/str)
 include_directories(src/stralloc)
 include_directories(src/strerr)
+include_directories(src/substdio)
 include_directories(src/tai)
 include_directories(src/taia)
 include_directories(src/uint16)
@@ -219,6 +220,12 @@ set(strerr_SRCS
     src/strerr/strerr_sys.c
     )
 
+set(substdio_SRCS
+    src/substdio/substdio.h
+    src/substdio/substdio.c
+    src/substdio/substdio_copy.c
+    )
+
 set(tai_SRCS
     src/tai/tai.h
     src/tai/tai_add.c
@@ -267,6 +274,7 @@ set(LIB_SRC
     ${str_SRCS}
     ${stralloc_SRCS}
     ${strerr_SRCS}
+    ${substdio_SRCS}
     ${tai_SRCS}
     ${taia_SRCS}
     ${uint16_SRCS}
