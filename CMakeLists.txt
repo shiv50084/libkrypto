@@ -183,6 +183,7 @@ set(error_SRCS
     )
 
 set(fmt_SRCS
+    src/fmt/auto_split.h
     src/fmt/fmt.h
     src/fmt/fmt_str.c
     src/fmt/fmt_strn.c
