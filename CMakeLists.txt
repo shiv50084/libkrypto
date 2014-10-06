@@ -167,6 +167,7 @@ set(iopause_SRCS
 
 set(open_SRCS
     src/open/open.h
+    src/open/readwrite.h
     src/open/open_read.c
     src/open/open_trunc.c
     src/open/readclose.h
