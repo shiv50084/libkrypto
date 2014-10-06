@@ -105,6 +105,7 @@ if (NOT EXISTS "${CMAKE_SOURCE_DIR}/src/uint32/uint32.h")
     endif()
 endif()
 
+include_directories(src/alloc)
 include_directories(src/buffer)
 include_directories(src/byte)
 include_directories(src/error)
@@ -120,6 +121,12 @@ include_directories(src/taia)
 include_directories(src/uint16)
 include_directories(src/uint32)
 include_directories(src/uint64)
+
+set(alloc_SRCS
+    src/alloc/alloc.h
+    src/alloc/alloc.c
+    src/alloc/alloc_re.c
+    )
 
 set(buffer_SRCS
     src/buffer/buffer.h
@@ -166,6 +173,9 @@ set(open_SRCS
     )
 
 set(socket_SRCS
+    src/socket/ndelay.h
+    src/socket/ndelay_off.c
+    src/socket/ndelay_on.c
     src/socket/socket.h
     src/socket/socket_accept.c
     src/socket/socket_bind.c
@@ -247,6 +257,7 @@ set(uint32_SRCS
 
 set(LIB_TARGET libkr1pt0)
 set(LIB_SRC
+    ${alloc_SRCS}
     ${buffer_SRCS}
     ${byte_SRCS}
     ${error_SRCS}
