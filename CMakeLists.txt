@@ -105,6 +105,32 @@ if (NOT EXISTS "${CMAKE_SOURCE_DIR}/src/uint32/uint32.h")
     endif()
 endif()
 
+# Checks whether the given function exists.
+include(CheckFunctionExists)
+
+# Check if vfork exists
+check_function_exists(vfork HAVE_VFORK)
+if (NOT EXISTS "${CMAKE_SOURCE_DIR}/src/fork/fork.h")
+    if (HAVE_VFORK)
+	if (${CMAKE_VERSION} VERSION_LESS "3.0.0")
+	    file(RENAME "${CMAKE_SOURCE_DIR}/src/fork/fork.h2"
+			"${CMAKE_SOURCE_DIR}/src/fork/fork.h")
+	else()
+	    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/fork/fork.h"
+			  INPUT "${CMAKE_SOURCE_DIR}/src/fork/fork.h2")
+	endif()
+    else()
+       if (${CMAKE_VERSION} VERSION_LESS "3.0.0")
+	    file(RENAME "${CMAKE_SOURCE_DIR}/src/fork/fork.h1"
+			"${CMAKE_SOURCE_DIR}/src/fork/fork.h")
+	else()
+	    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/fork/fork.h"
+			  INPUT "${CMAKE_SOURCE_DIR}/src/fork/fork.h1")
+	endif()
+    endif()
+endif()
+
+
 include_directories(src/alloc)
 include_directories(src/buffer)
 include_directories(src/byte)
@@ -115,6 +141,7 @@ include_directories(src/error)
 include_directories(src/exit)
 include_directories(src/fd)
 include_directories(src/fmt)
+include_directories(src/fork)
 include_directories(src/iopause)
 include_directories(src/open)
 include_directories(src/select)
