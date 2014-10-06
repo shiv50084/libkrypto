@@ -112,6 +112,7 @@ include_directories(src/case)
 include_directories(src/datetime)
 include_directories(src/error)
 include_directories(src/exit)
+include_directories(src/fmt)
 include_directories(src/iopause)
 include_directories(src/open)
 include_directories(src/select)
@@ -179,6 +180,17 @@ set(error_SRCS
     src/error/error.c
     src/error/error_str.c
     src/error/error_temp.c
+    )
+
+set(fmt_SRCS
+    src/fmt/fmt.h
+    src/fmt/fmt_str.c
+    src/fmt/fmt_strn.c
+    src/fmt/fmt_uint.c
+    src/fmt/fmt_uint0.c
+    src/fmt/fmt_ulong.c
+    src/fmt/fmtqfn.h
+    src/fmt/fmtqfn.c
     )
 
 set(iopause_SRCS
@@ -303,6 +315,7 @@ set(LIB_SRC
     ${case_SRCS}
     ${datetime_SRCS}
     ${error_SRCS}
+    ${fmt_SRCS}
     ${iopause_SRCS}
     ${open_SRCS}
     ${socket_SRCS}
