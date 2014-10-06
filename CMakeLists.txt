@@ -113,6 +113,7 @@ include_directories(src/datetime)
 include_directories(src/env)
 include_directories(src/error)
 include_directories(src/exit)
+include_directories(src/fd)
 include_directories(src/fmt)
 include_directories(src/iopause)
 include_directories(src/open)
@@ -187,6 +188,12 @@ set(error_SRCS
     src/error/error.c
     src/error/error_str.c
     src/error/error_temp.c
+    )
+
+set(fd_SRCS
+    src/fd/fd.h
+    src/fd/fd_copy.c
+    src/fd/fd_move.c
     )
 
 set(fmt_SRCS
@@ -324,6 +331,7 @@ set(LIB_SRC
     ${datetime_SRCS}
     ${env_SRCS}
     ${error_SRCS}
+    ${fd_SRCS}
     ${fmt_SRCS}
     ${iopause_SRCS}
     ${open_SRCS}
