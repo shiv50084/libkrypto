@@ -134,7 +134,9 @@ set(alloc_SRCS
 set(buffer_SRCS
     src/buffer/buffer.h
     src/buffer/buffer.c
+    src/buffer/buffer_0.c
     src/buffer/buffer_1.c
+    src/buffer/buffer_1s.c
     src/buffer/buffer_2.c
     src/buffer/buffer_copy.c
     src/buffer/buffer_get.c
