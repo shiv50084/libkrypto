@@ -33,26 +33,50 @@ include(CheckIncludeFiles)
 
 # Check if sys/select.h exists
 check_include_files("sys/select.h" HAVE_SYS_SELECT_H)
-if (HAVE_SYS_SELECT_H)
-    message("Use of ${CMAKE_SOURCE_DIR}/src/select/select.h2")
-    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/select/select.h"
-		  INPUT "${CMAKE_SOURCE_DIR}/src/select/select.h2")
-else(HAVE_SYS_SELECT_H)
-    message("Use of ${CMAKE_SOURCE_DIR}/src/select/select.h1")
-    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/select/select.h"
-		  INPUT "${CMAKE_SOURCE_DIR}/src/select/select.h1")
-endif(HAVE_SYS_SELECT_H)
+if (NOT EXISTS "${CMAKE_SOURCE_DIR}/src/select/select.h")
+    if (HAVE_SYS_SELECT_H)
+	message("Use of ${CMAKE_SOURCE_DIR}/src/select/select.h2")
+	if (${CMAKE_VERSION} VERSION_LESS "3.0.0")
+	    file(RENAME "${CMAKE_SOURCE_DIR}/src/select/select.h2"
+			"${CMAKE_SOURCE_DIR}/src/select/select.h")
+	else()
+	    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/select/select.h"
+			  INPUT "${CMAKE_SOURCE_DIR}/src/select/select.h2")
+	endif()
+    else()
+	message("Use of ${CMAKE_SOURCE_DIR}/src/select/select.h1")
+	if (${CMAKE_VERSION} VERSION_LESS "3.0.0")
+	    file(RENAME "${CMAKE_SOURCE_DIR}/src/select/select.h1"
+			"${CMAKE_SOURCE_DIR}/src/select/select.h")
+	else()
+	    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/select/select.h"
+			  INPUT "${CMAKE_SOURCE_DIR}/src/select/select.h1")
+	endif()
+    endif()
+endif()
 
 # Check if poll.h exists
 check_include_files("poll.h" HAVE_POLL_H)
-if (HAVE_POLL_H)
-    message("Use of ${CMAKE_SOURCE_DIR}/src/iopause/iopause.h2")
-    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/iopause/iopause.h"
-		  INPUT "${CMAKE_SOURCE_DIR}/src/iopause/iopause.h2")
-else()
-    message("Use of ${CMAKE_SOURCE_DIR}/src/iopause/iopause.h1")
-    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/iopause/iopause.h"
-		  INPUT "${CMAKE_SOURCE_DIR}/src/iopause/iopause.h1")
+if (NOT EXISTS "${CMAKE_SOURCE_DIR}/src/iopause/iopause.h")
+    if (HAVE_POLL_H)
+	message("Use of ${CMAKE_SOURCE_DIR}/src/iopause/iopause.h2")
+	if (${CMAKE_VERSION} VERSION_LESS "3.0.0")
+	    file(RENAME "${CMAKE_SOURCE_DIR}/src/iopause/iopause.h2"
+			"${CMAKE_SOURCE_DIR}/src/iopause/iopause.h")
+	else()
+	    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/iopause/iopause.h"
+			  INPUT "${CMAKE_SOURCE_DIR}/src/iopause/iopause.h2")
+	endif()
+    else()
+	message("Use of ${CMAKE_SOURCE_DIR}/src/iopause/iopause.h1")
+	if (${CMAKE_VERSION} VERSION_LESS "3.0.0")
+	    file(RENAME "${CMAKE_SOURCE_DIR}/src/iopause/iopause.h1"
+			"${CMAKE_SOURCE_DIR}/src/iopause/iopause.h")
+	else()
+	    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/iopause/iopause.h"
+			  INPUT "${CMAKE_SOURCE_DIR}/src/iopause/iopause.h1")
+	endif()
+    endif()
 endif()
 
 # Check type sizes
@@ -61,14 +85,25 @@ include(CheckTypeSize)
 # Check unsigned long size
 check_type_size("unsigned long" ULONG_SIZE)
 message("Size of unsigned long is ${ULONG_SIZE}")
-if (ULONG_SIZE MATCHES "8")
-    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/uint32/uint32.h"
-		  INPUT "${CMAKE_SOURCE_DIR}/src/uint32/uint32.h2")
-else()
-    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/uint32/uint32.h"
-		  INPUT "${CMAKE_SOURCE_DIR}/src/uint32/uint32.h1")
+if (NOT EXISTS "${CMAKE_SOURCE_DIR}/src/uint32/uint32.h")
+    if (ULONG_SIZE MATCHES "8")
+	if (${CMAKE_VERSION} VERSION_LESS "3.0.0")
+	    file(RENAME "${CMAKE_SOURCE_DIR}/src/uint32/uint32.h2"
+			"${CMAKE_SOURCE_DIR}/src/uint32/uint32.h")
+	else()
+	    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/uint32/uint32.h"
+			  INPUT "${CMAKE_SOURCE_DIR}/src/uint32/uint32.h2")
+	endif()
+    else()
+       if (${CMAKE_VERSION} VERSION_LESS "3.0.0")
+	    file(RENAME "${CMAKE_SOURCE_DIR}/src/uint32/uint32.h1"
+			"${CMAKE_SOURCE_DIR}/src/uint32/uint32.h")
+	else()
+	    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/uint32/uint32.h"
+			  INPUT "${CMAKE_SOURCE_DIR}/src/uint32/uint32.h1")
+	endif()
+    endif()
 endif()
-
 
 include_directories(src/buffer)
 include_directories(src/byte)
@@ -116,8 +151,7 @@ set(error_SRCS
     )
 
 set(iopause_SRCS
-    src/iopause/iopause.h1
-    src/iopause/iopause.h2
+    src/iopause/iopause.h
     src/iopause/iopause.c
     )
 
@@ -205,8 +239,7 @@ set(uint16_SRCS
     )
 
 set(uint32_SRCS
-    src/uint32/uint32.h1
-    src/uint32/uint32.h2
+    src/uint32/uint32.h
     src/uint32/uint32_pack.c
     src/uint32/uint32_unpack.c
     )
