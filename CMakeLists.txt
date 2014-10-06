@@ -61,7 +61,7 @@ include(CheckTypeSize)
 # Check unsigned long size
 check_type_size("unsigned long" ULONG_SIZE)
 message("Size of unsigned long is ${ULONG_SIZE}")
-if (${ULONG_SIZE} strequal "8")
+if (ULONG_SIZE MATCHES "8")
     file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/uint32/uint32.h"
 		  INPUT "${CMAKE_SOURCE_DIR}/src/uint32/uint32.h2")
 else()
