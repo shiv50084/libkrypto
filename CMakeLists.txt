@@ -108,6 +108,7 @@ endif()
 include_directories(src/alloc)
 include_directories(src/buffer)
 include_directories(src/byte)
+include_directories(src/case)
 include_directories(src/error)
 include_directories(src/exit)
 include_directories(src/iopause)
@@ -153,6 +154,15 @@ set(byte_SRCS
     src/byte/byte_diff.c
     src/byte/byte_rchr.c
     src/byte/byte_zero.c
+    )
+
+set(case_SRCS
+    src/case/case.h
+    src/case/case_diffb.c
+    src/case/case_diffs.c
+    src/case/case_lowerb.c
+    src/case/case_lowers.c
+    src/case/case_starts.c
     )
 
 set(error_SRCS
@@ -281,6 +291,7 @@ set(LIB_SRC
     ${alloc_SRCS}
     ${buffer_SRCS}
     ${byte_SRCS}
+    ${case_SRCS}
     ${error_SRCS}
     ${iopause_SRCS}
     ${open_SRCS}
