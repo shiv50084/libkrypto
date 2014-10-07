@@ -79,6 +79,31 @@ if (NOT EXISTS "${CMAKE_SOURCE_DIR}/src/iopause/iopause.h")
     endif()
 endif()
 
+# Check if dirent.h exists
+check_include_files("dirent.h" HAVE_DIRENT_H)
+if (NOT EXISTS "${CMAKE_SOURCE_DIR}/src/direntry/direntry.h")
+    if (HAVE_DIRENT_H)
+        message("Use of ${CMAKE_SOURCE_DIR}/src/direntry/direntry.h2")
+        if (${CMAKE_VERSION} VERSION_LESS "3.0.0")
+            file(RENAME "${CMAKE_SOURCE_DIR}/src/direntry/direntry.h2"
+                        "${CMAKE_SOURCE_DIR}/src/direntry/direntry.h")
+        else()
+            file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/direntry/direntry.h"
+                          INPUT "${CMAKE_SOURCE_DIR}/src/direntry/direntry.h2")
+        endif()
+    else()
+        message("Use of ${CMAKE_SOURCE_DIR}/src/dirent/direntry.h1")
+        if (${CMAKE_VERSION} VERSION_LESS "3.0.0")
+            file(RENAME "${CMAKE_SOURCE_DIR}/src/direntry/direntry.h1"
+                        "${CMAKE_SOURCE_DIR}/src/direntry/direntry.h")
+        else()
+            file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/direntry/direntry.h"
+                          INPUT "${CMAKE_SOURCE_DIR}/src/direntry/direntry.h1")
+        endif()
+    endif()
+endif()
+
+
 # Check type sizes
 include(CheckTypeSize)
 
