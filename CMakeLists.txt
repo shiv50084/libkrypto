@@ -103,6 +103,30 @@ if (NOT EXISTS "${CMAKE_SOURCE_DIR}/src/direntry/direntry.h")
     endif()
 endif()
 
+# Check if sys/wait.h exists
+check_include_files("sys/wait.h" HAVE_SYS_WAIT_H)
+if (NOT EXISTS "${CMAKE_SOURCE_DIR}/src/haswaitp/haswaitp.h")
+    if (HAVE_SYS_WAIT_H)
+	message("Use of ${CMAKE_SOURCE_DIR}/src/haswaitp/haswaitp.h2")
+	if (${CMAKE_VERSION} VERSION_LESS "3.0.0")
+	    file(RENAME "${CMAKE_SOURCE_DIR}/src/haswaitp/haswaitp.h2"
+			"${CMAKE_SOURCE_DIR}/src/haswaitp/haswaitp.h")
+	else()
+	    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/haswaitp/haswaitp.h"
+			  INPUT "${CMAKE_SOURCE_DIR}/src/haswaitp/haswaitp.h2")
+	endif()
+    else()
+	message("Use of ${CMAKE_SOURCE_DIR}/src/haswaitp/haswaitp.h1")
+	if (${CMAKE_VERSION} VERSION_LESS "3.0.0")
+	    file(RENAME "${CMAKE_SOURCE_DIR}/src/haswaitp/haswaitp.h1"
+			"${CMAKE_SOURCE_DIR}/src/haswaitp/haswaitp.h")
+	else()
+	    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/haswaitp/haswaitp.h"
+			  INPUT "${CMAKE_SOURCE_DIR}/src/haswaitp/haswaitp.h1")
+	endif()
+    endif()
+endif()
+
 
 # Check type sizes
 include(CheckTypeSize)
@@ -168,6 +192,7 @@ include_directories(src/fd)
 include_directories(src/fmt)
 include_directories(src/fork)
 include_directories(src/getln)
+include_directories(src/haswaitp)
 include_directories(src/iopause)
 include_directories(src/open)
 include_directories(src/select)
@@ -182,6 +207,7 @@ include_directories(src/taia)
 include_directories(src/uint16)
 include_directories(src/uint32)
 include_directories(src/uint64)
+include_directories(src/wait)
 
 set(alloc_SRCS
     src/alloc/alloc.h
@@ -380,6 +406,11 @@ set(uint32_SRCS
     src/uint32/uint32_unpack.c
     )
 
+set(wait_SRCS
+    src/wait/wait.h
+    src/wait/wait_nohang.c
+    src/wait/wait_pid.c
+    )
 
 set(LIB_TARGET libkr1pt0)
 set(LIB_SRC
@@ -405,6 +436,7 @@ set(LIB_SRC
     ${taia_SRCS}
     ${uint16_SRCS}
     ${uint32_SRCS}
+    ${wait_SRCS}
     )
 
 
