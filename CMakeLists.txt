@@ -25,7 +25,7 @@ endif()
 if (DEFINED LIBKRYPTO_STATIC)
     option(LIBKRYPTO_STATIC "Build static lib" ${LIBKRYPTO_STATIC})
 else()
-    option(LIBKRYPTO_STATIC "Build static lib" ON)
+    option(LIBKRYPTO_STATIC "Build static lib" OFF)
 endif()
 
 # Check header files
@@ -468,7 +468,7 @@ set(wait_SRCS
     src/wait/wait_pid.c
     )
 
-set(LIB_TARGET libkr1pt0)
+set(LIB_TARGET kr1pt0)
 set(LIB_SRC
     ${alloc_SRCS}
     ${buffer_SRCS}
