@@ -196,6 +196,7 @@ include_directories(src/haswaitp)
 include_directories(src/iopause)
 include_directories(src/open)
 include_directories(src/select)
+include_directories(src/sig)
 include_directories(src/socket)
 include_directories(src/str)
 include_directories(src/stralloc)
@@ -307,6 +308,14 @@ set(open_SRCS
     src/open/readclose.c
     src/open/openreadclose.h
     src/open/openreadclose.c
+    )
+
+set(sig_SRCS
+    src/sig/sig.h
+    src/sig/sig.c
+    src/sig/sig_block.c
+    src/sig/sig_catch.c
+    src/sig/sig_pause.c
     )
 
 set(socket_SRCS
@@ -426,6 +435,7 @@ set(LIB_SRC
     ${getln_SRCS}
     ${iopause_SRCS}
     ${open_SRCS}
+    ${sig_SRCS}
     ${socket_SRCS}
     ${str_SRCS}
     ${stralloc_SRCS}
