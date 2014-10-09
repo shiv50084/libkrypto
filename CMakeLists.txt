@@ -179,6 +179,29 @@ if (NOT EXISTS "${CMAKE_SOURCE_DIR}/src/fork/fork.h")
     endif()
 endif()
 
+# Check if sigprocmask exists
+check_function_exists(sigprocmask HAVE_SGPRM)
+if (NOT EXISTS "${CMAKE_SOURCE_DIR}/src/hassgprm/hassgprm.h")
+    if (HAVE_SGPRM)
+	if (${CMAKE_VERSION} VERSION_LESS "3.0.0")
+	    file(RENAME "${CMAKE_SOURCE_DIR}/src/hassgprm/hassgprm.h2"
+			"${CMAKE_SOURCE_DIR}/src/hassgprm/hassgprm.h")
+	else()
+	    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/hassgprm/hassgprm.h"
+			  INPUT "${CMAKE_SOURCE_DIR}/src/hassgprm/hassgprm.h2")
+	endif()
+    else()
+       if (${CMAKE_VERSION} VERSION_LESS "3.0.0")
+	    file(RENAME "${CMAKE_SOURCE_DIR}/src/hassgprm/hassgprm.h1"
+			"${CMAKE_SOURCE_DIR}/src/hassgprm/hassgprm.h")
+	else()
+	    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/hassgprm/hassgprm.h"
+			  INPUT "${CMAKE_SOURCE_DIR}/src/hassgprm/hassgprm.h1")
+	endif()
+    endif()
+endif()
+
+
 
 include_directories(src/alloc)
 include_directories(src/buffer)
@@ -192,6 +215,7 @@ include_directories(src/fd)
 include_directories(src/fmt)
 include_directories(src/fork)
 include_directories(src/getln)
+include_directories(src/hassgprm)
 include_directories(src/haswaitp)
 include_directories(src/iopause)
 include_directories(src/open)
