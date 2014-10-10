@@ -1,3 +1,6 @@
+/* Public domain. */
+
+#include <errno.h>
 #include "error.h"
 
 /* warning: as coverage improves here, should update error_{str,temp} */
@@ -91,4 +94,39 @@ int error_acces =
 EACCES;
 #else
 -13;
+#endif
+
+int error_nodevice =
+#ifdef ENXIO
+ENXIO;
+#else
+-14;
+#endif
+
+int error_proto =
+#ifdef EPROTO
+EPROTO;
+#else
+-15;
+#endif
+
+int error_isdir =
+#ifdef EISDIR
+EISDIR;
+#else
+-16;
+#endif
+
+int error_connrefused =
+#ifdef ECONNREFUSED
+ECONNREFUSED;
+#else
+-17;
+#endif
+
+int error_notdir =
+#ifdef ENOTDIR
+ENOTDIR;
+#else
+-18;
 #endif
