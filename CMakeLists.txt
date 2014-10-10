@@ -275,6 +275,7 @@ include_directories(src/hassgact)
 include_directories(src/hassgprm)
 include_directories(src/haswaitp)
 include_directories(src/iopause)
+include_directories(src/match)
 include_directories(src/open)
 include_directories(src/pathexec)
 include_directories(src/scan)
@@ -396,6 +397,11 @@ set(getln_SRCS
 set(iopause_SRCS
     src/iopause/iopause.h
     src/iopause/iopause.c
+    )
+
+set(match_SRCS
+    src/match/match.h
+    src/match/match.c
     )
 
 set(open_SRCS
@@ -552,6 +558,7 @@ set(LIB_SRC
     ${fmt_SRCS}
     ${getln_SRCS}
     ${iopause_SRCS}
+    ${match_SRCS}
     ${open_SRCS}
     ${pathexec_SRCS}
     ${scan_SRCS}
