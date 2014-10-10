@@ -232,6 +232,27 @@ if (NOT EXISTS "${CMAKE_SOURCE_DIR}/src/hassgact/hassgact.h")
     endif()
 endif()
 
+# Check if mkfifo exists
+check_function_exists(mkfifo HAVE_MKFFO)
+if (NOT EXISTS "${CMAKE_SOURCE_DIR}/src/hasmkffo/hasmkffo.h")
+    if (HAVE_MKFFO)
+	if (${CMAKE_VERSION} VERSION_LESS "3.0.0")
+	    file(RENAME "${CMAKE_SOURCE_DIR}/src/hasmkffo/hasmkffo.h2"
+			"${CMAKE_SOURCE_DIR}/src/hasmkffo/hasmkffo.h")
+	else()
+	    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/hasmkffo/hasmkffo.h"
+			  INPUT "${CMAKE_SOURCE_DIR}/src/hasmkffo/hasmkffo.h2")
+	endif()
+    else()
+       if (${CMAKE_VERSION} VERSION_LESS "3.0.0")
+	    file(RENAME "${CMAKE_SOURCE_DIR}/src/hasmkffo/hasmkffo.h1"
+			"${CMAKE_SOURCE_DIR}/src/hasmkffo/hasmkffo.h")
+	else()
+	    file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/src/hasmkffo/hasmkffo.h"
+			  INPUT "${CMAKE_SOURCE_DIR}/src/hasmkffo/hasmkffo.h1")
+	endif()
+    endif()
+endif()
 
 
 include_directories(src/alloc)
@@ -243,9 +264,11 @@ include_directories(src/env)
 include_directories(src/error)
 include_directories(src/exit)
 include_directories(src/fd)
+include_directories(src/fifo)
 include_directories(src/fmt)
 include_directories(src/fork)
 include_directories(src/getln)
+include_directories(src/hasmkffo)
 include_directories(src/hassgact)
 include_directories(src/hassgprm)
 include_directories(src/haswaitp)
@@ -333,6 +356,11 @@ set(fd_SRCS
     src/fd/fd.h
     src/fd/fd_copy.c
     src/fd/fd_move.c
+    )
+
+set(fifo_SRCS
+    src/fifo/fifo.h
+    src/fifo/fifo.c
     )
 
 set(fmt_SRCS
@@ -506,6 +534,7 @@ set(LIB_SRC
     ${env_SRCS}
     ${error_SRCS}
     ${fd_SRCS}
+    ${fifo_SRCS}
     ${fmt_SRCS}
     ${getln_SRCS}
     ${iopause_SRCS}
