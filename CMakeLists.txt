@@ -13,7 +13,16 @@ endif (CMAKE_BUILD_TYPE MATCHES "Debug")
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
-set(CMAKE_C_FLAGS "-D_BSD_SOURCE -std=c99 -Wall -W -O2")
+
+# If it's linux, add POSIX standards definition of some extra functions.
+# For more info see http://stackoverflow.com/questions/5378778/what-does-d-xopen-source-do-mean
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    set(CMAKE_C_FLAGS "-D_BSD_SOURCE -std=c99 -Wall -W -O2 -D_XOPEN_SOURCE=700")
+endif()
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(CMAKE_C_FLAGS "-D_BSD_SOURCE -std=c99 -Wall -W -O2")
+endif()
 
 
 if (DEFINED LIBKRYPTO_SHARED)
