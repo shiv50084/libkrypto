@@ -251,6 +251,7 @@ include_directories(src/hassgprm)
 include_directories(src/haswaitp)
 include_directories(src/iopause)
 include_directories(src/open)
+include_directories(src/seek)
 include_directories(src/select)
 include_directories(src/sig)
 include_directories(src/socket)
@@ -364,6 +365,11 @@ set(open_SRCS
     src/open/readclose.c
     src/open/openreadclose.h
     src/open/openreadclose.c
+    )
+
+set(seek_SRCS
+    src/seek/seek.h
+    src/seek/seek_set.c
     )
 
 set(sig_SRCS
@@ -491,6 +497,7 @@ set(LIB_SRC
     ${getln_SRCS}
     ${iopause_SRCS}
     ${open_SRCS}
+    ${seek_SRCS}
     ${sig_SRCS}
     ${socket_SRCS}
     ${str_SRCS}
