@@ -259,6 +259,7 @@ include_directories(src/alloc)
 include_directories(src/buffer)
 include_directories(src/byte)
 include_directories(src/case)
+include_directories(src/coe)
 include_directories(src/datetime)
 include_directories(src/env)
 include_directories(src/error)
@@ -329,6 +330,11 @@ set(case_SRCS
     src/case/case_lowerb.c
     src/case/case_lowers.c
     src/case/case_starts.c
+    )
+
+set(coe_SRCS
+    src/coe/coe.h
+    src/coe/coe.c
     )
 
 set(datetime_SRCS
@@ -530,6 +536,7 @@ set(LIB_SRC
     ${buffer_SRCS}
     ${byte_SRCS}
     ${case_SRCS}
+    ${coe_SRCS}
     ${datetime_SRCS}
     ${env_SRCS}
     ${error_SRCS}
