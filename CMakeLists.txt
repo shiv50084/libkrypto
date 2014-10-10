@@ -261,6 +261,7 @@ include_directories(src/byte)
 include_directories(src/case)
 include_directories(src/coe)
 include_directories(src/datetime)
+include_directories(src/deepsleep)
 include_directories(src/env)
 include_directories(src/error)
 include_directories(src/exit)
@@ -343,6 +344,11 @@ set(datetime_SRCS
     src/datetime/datetime_un.c
     src/datetime/date822fmt.h
     src/datetime/date822fmt.c
+    )
+
+set(deepsleep_SRCS
+    src/deepsleep/deepsleep.h
+    src/deepsleep/deepsleep.c
     )
 
 set(env_SRCS
@@ -538,6 +544,7 @@ set(LIB_SRC
     ${case_SRCS}
     ${coe_SRCS}
     ${datetime_SRCS}
+    ${deepsleep_SRCS}
     ${env_SRCS}
     ${error_SRCS}
     ${fd_SRCS}
