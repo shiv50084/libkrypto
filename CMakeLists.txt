@@ -251,6 +251,7 @@ include_directories(src/hassgprm)
 include_directories(src/haswaitp)
 include_directories(src/iopause)
 include_directories(src/open)
+include_directories(src/pathexec)
 include_directories(src/scan)
 include_directories(src/seek)
 include_directories(src/select)
@@ -366,6 +367,12 @@ set(open_SRCS
     src/open/readclose.c
     src/open/openreadclose.h
     src/open/openreadclose.c
+    )
+
+set(pathexec_SRCS
+    src/pathexec/pathexec.h
+    src/pathexec/pathexec_env.c
+    src/pathexec/pathexec_run.c
     )
 
 set(scan_SRCS
@@ -503,6 +510,7 @@ set(LIB_SRC
     ${getln_SRCS}
     ${iopause_SRCS}
     ${open_SRCS}
+    ${pathexec_SRCS}
     ${scan_SRCS}
     ${seek_SRCS}
     ${sig_SRCS}
